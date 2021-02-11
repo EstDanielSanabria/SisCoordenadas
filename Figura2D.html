@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Figura 2D</title>
+		<script src="js/three.js"></script>
+		<style>
+			html, body { margin: 0; padding: 0;}
+		</style>
+	</head>
+	<body>
+		<script>
+			const scene = new THREE.Scene();
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			
+			const boxGeometry = new THREE.BufferGeometry();
+
+			const vertices = new Float32Array([
+			-1.0, -1.0,  1.0,
+			1.0, -1.0,  1.0,
+			1.0,  1.0,  1.0,
+			1.0,  1.0,  1.0,
+			-1.0,  1.0,  1.0,
+			-1.0, -1.0,  1.0
+			]);
+
+			boxGeometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+			const material = new THREE.MeshBasicMaterial( { color: 0x31b189 } );
+			const box = new THREE.Mesh( boxGeometry, material );
+			
+			scene.add(box);
+
+			camera.position.z = 10;
+
+			const animate = function(){
+				requestAnimationFrame( animate );
+				renderer.render( scene, camera );
+			}
+
+			animate();
+
+		</script>
+	</body>
+</html>
